@@ -3,3 +3,10 @@
 
 # Python version file
 .python-version
+
+# Ignorar archivos .pyc y carpetas __pycache__/
+__pycache__/
+*.pyc
+
+# Ignorar archivos de configuración
+*.env
