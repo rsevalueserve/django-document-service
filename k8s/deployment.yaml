@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-docservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django-docservice
+  template:
+    metadata:
+      labels:
+        app: django-docservice
+    spec:
+      containers:
+      - name: django-docservice
+        image: django-docservice:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        envFrom:
+        - secretRef:
+            name: django-secrets
+        volumeMounts:
+        - name: media-volume
+          mountPath: /app/media
+      volumes:
+      - name: media-volume
+        emptyDir: {}
